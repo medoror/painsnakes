@@ -43,7 +43,7 @@ defmodule PainsnakesWeb do
         layouts: [html: PainsnakesWeb.Layouts]
 
       import Plug.Conn
-      import PainsnakesWeb.Gettext
+      use Gettext, backend: PainsnakesWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -85,7 +85,7 @@ defmodule PainsnakesWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import PainsnakesWeb.CoreComponents
-      import PainsnakesWeb.Gettext
+      use Gettext, backend: PainsnakesWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

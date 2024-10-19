@@ -17,7 +17,7 @@ defmodule PainsnakesWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import PainsnakesWeb.Gettext
+  use Gettext, backend: PainsnakesWeb.Gettext
 
   @doc """
   Renders a modal.
