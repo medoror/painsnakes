@@ -20,7 +20,8 @@ defmodule PainsnakesWeb.Router do
   scope "/", PainsnakesWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
+    live "/", BoardLive, :index
   end
 
   # Other scopes may use custom stacks.
