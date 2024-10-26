@@ -1,6 +1,8 @@
 defmodule PainsnakesWeb.Router do
   use PainsnakesWeb, :router
 
+  import PainsnakesWeb.TeamAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +10,7 @@ defmodule PainsnakesWeb.Router do
     plug :put_root_layout, html: {PainsnakesWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_team
   end
 
   pipeline :api do
@@ -39,6 +42,44 @@ defmodule PainsnakesWeb.Router do
 
       live_dashboard "/dashboard", metrics: PainsnakesWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
+    end
+  end
+
+  ## Authentication routes
+
+  scope "/", PainsnakesWeb do
+    pipe_through [:browser, :redirect_if_team_is_authenticated]
+
+    live_session :redirect_if_team_is_authenticated,
+      on_mount: [{PainsnakesWeb.TeamAuth, :redirect_if_team_is_authenticated}] do
+      live "/teams/register", TeamRegistrationLive, :new
+      live "/teams/log_in", TeamLoginLive, :new
+      live "/teams/reset_password", TeamForgotPasswordLive, :new
+      live "/teams/reset_password/:token", TeamResetPasswordLive, :edit
+    end
+
+    post "/teams/log_in", TeamSessionController, :create
+  end
+
+  scope "/", PainsnakesWeb do
+    pipe_through [:browser, :require_authenticated_team]
+
+    live_session :require_authenticated_team,
+      on_mount: [{PainsnakesWeb.TeamAuth, :ensure_authenticated}] do
+      live "/teams/settings", TeamSettingsLive, :edit
+      live "/teams/settings/confirm_email/:token", TeamSettingsLive, :confirm_email
+    end
+  end
+
+  scope "/", PainsnakesWeb do
+    pipe_through [:browser]
+
+    delete "/teams/log_out", TeamSessionController, :delete
+
+    live_session :current_team,
+      on_mount: [{PainsnakesWeb.TeamAuth, :mount_current_team}] do
+      live "/teams/confirm/:token", TeamConfirmationLive, :edit
+      live "/teams/confirm", TeamConfirmationInstructionsLive, :new
     end
   end
 end
