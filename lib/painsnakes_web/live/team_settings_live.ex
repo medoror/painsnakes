@@ -183,7 +183,9 @@ defmodule PainsnakesWeb.TeamSettingsLive do
     case Accounts.update_team_name(team_name, password, team_params) do
       {:ok, _} ->
         info = "Name changed successfully."
-        {:noreply, socket |> put_flash(:info, info) |> assign(team_name_form_current_password: nil)}
+
+        {:noreply,
+         socket |> put_flash(:info, info) |> assign(team_name_form_current_password: nil)}
 
       {:error, changeset} ->
         {:noreply, assign(socket, name_form: to_form(changeset))}

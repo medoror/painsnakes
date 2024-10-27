@@ -69,7 +69,7 @@ if Mix.env() == :dev do
       pre_commit: [
         tasks: [
           {:mix_task, :test},
-          {:mix_task, :format, ["--dry-run"]}
+          {:mix_task, :format, ["--check-formatted"]}
         ]
       ]
     ]

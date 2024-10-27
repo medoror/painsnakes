@@ -32,7 +32,14 @@ defmodule PainsnakesWeb.TeamLoginLiveTest do
       {:ok, lv, _html} = live(conn, ~p"/teams/log_in")
 
       form =
-        form(lv, "#login_form", team: %{team_name: team.team_name, email: team.email, password: password, remember_me: true})
+        form(lv, "#login_form",
+          team: %{
+            team_name: team.team_name,
+            email: team.email,
+            password: password,
+            remember_me: true
+          }
+        )
 
       conn = submit_form(form, conn)
 
@@ -46,7 +53,12 @@ defmodule PainsnakesWeb.TeamLoginLiveTest do
 
       form =
         form(lv, "#login_form",
-          team: %{team_name: "Some team name", email: "test@email.com", password: "123456", remember_me: true}
+          team: %{
+            team_name: "Some team name",
+            email: "test@email.com",
+            password: "123456",
+            remember_me: true
+          }
         )
 
       conn = submit_form(form, conn)

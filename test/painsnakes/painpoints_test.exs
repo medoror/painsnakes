@@ -35,7 +35,9 @@ defmodule Painsnakes.PainpointsTest do
       painsnake = painsnake_fixture()
       update_attrs = %{category_name: "some updated category_name"}
 
-      assert {:ok, %Painsnake{} = painsnake} = Painpoints.update_painsnake(painsnake, update_attrs)
+      assert {:ok, %Painsnake{} = painsnake} =
+               Painpoints.update_painsnake(painsnake, update_attrs)
+
       assert painsnake.category_name == "some updated category_name"
     end
 
@@ -88,9 +90,15 @@ defmodule Painsnakes.PainpointsTest do
 
     test "update_painpoint/2 with valid data updates the painpoint" do
       painpoint = painpoint_fixture()
-      update_attrs = %{description: "some updated description", creation_date: ~U[2024-10-26 19:46:00Z]}
 
-      assert {:ok, %Painpoint{} = painpoint} = Painpoints.update_painpoint(painpoint, update_attrs)
+      update_attrs = %{
+        description: "some updated description",
+        creation_date: ~U[2024-10-26 19:46:00Z]
+      }
+
+      assert {:ok, %Painpoint{} = painpoint} =
+               Painpoints.update_painpoint(painpoint, update_attrs)
+
       assert painpoint.description == "some updated description"
       assert painpoint.creation_date == ~U[2024-10-26 19:46:00Z]
     end
