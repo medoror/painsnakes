@@ -17,12 +17,10 @@ defmodule PainsnakesWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PainsnakesWeb do
-    pipe_through :browser
-
-    # get "/", PageController, :home
-    live "/", BoardLive, :index
-  end
+  # scope "/", PainsnakesWeb do
+  #   pipe_through :browser
+  #   live "/", BoardLive, :index
+  # end
 
   # Other scopes may use custom stacks.
   # scope "/api", PainsnakesWeb do
@@ -67,6 +65,7 @@ defmodule PainsnakesWeb.Router do
 
     live_session :require_authenticated_team,
       on_mount: [{PainsnakesWeb.TeamAuth, :ensure_authenticated}] do
+      live "/", BoardLive, :index
       live "/teams/settings", TeamSettingsLive, :edit
       live "/teams/settings/confirm_email/:token", TeamSettingsLive, :confirm_email
     end

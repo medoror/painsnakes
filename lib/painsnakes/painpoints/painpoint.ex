@@ -13,7 +13,7 @@ defmodule Painsnakes.Painpoints.Painpoint do
   @doc false
   def changeset(painpoint, attrs) do
     painpoint
-    |> cast(attrs, [:description, :creation_date])
-    |> validate_required([:description, :creation_date])
+    |> cast(attrs, [:painsnake_id, :description, :creation_date])
+    |> validate_required([:painsnake_id, :description, :creation_date])
   end
 end

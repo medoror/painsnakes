@@ -2,6 +2,7 @@ defmodule Painsnakes.PainpointsTest do
   use Painsnakes.DataCase
 
   alias Painsnakes.Painpoints
+  import Painsnakes.AccountsFixtures
 
   describe "painsnakes" do
     alias Painsnakes.Painpoints.Painsnake
@@ -9,6 +10,11 @@ defmodule Painsnakes.PainpointsTest do
     import Painsnakes.PainpointsFixtures
 
     @invalid_attrs %{category_name: nil}
+
+    setup do
+      team = team_fixture()
+      %{team: team}
+    end
 
     test "list_painsnakes/0 returns all painsnakes" do
       painsnake = painsnake_fixture()
@@ -20,8 +26,8 @@ defmodule Painsnakes.PainpointsTest do
       assert Painpoints.get_painsnake!(painsnake.id) == painsnake
     end
 
-    test "create_painsnake/1 with valid data creates a painsnake" do
-      valid_attrs = %{category_name: "some category_name"}
+    test "create_painsnake/1 with valid data creates a painsnake", %{team: team} do
+      valid_attrs = %{category_name: "some category_name", team_id: team.id}
 
       assert {:ok, %Painsnake{} = painsnake} = Painpoints.create_painsnake(valid_attrs)
       assert painsnake.category_name == "some category_name"
@@ -66,6 +72,11 @@ defmodule Painsnakes.PainpointsTest do
 
     @invalid_attrs %{description: nil, creation_date: nil}
 
+    setup do
+      painsnake = painsnake_fixture()
+      %{painsnake: painsnake}
+    end
+
     test "list_painpoints/0 returns all painpoints" do
       painpoint = painpoint_fixture()
       assert Painpoints.list_painpoints() == [painpoint]
@@ -76,8 +87,12 @@ defmodule Painsnakes.PainpointsTest do
       assert Painpoints.get_painpoint!(painpoint.id) == painpoint
     end
 
-    test "create_painpoint/1 with valid data creates a painpoint" do
-      valid_attrs = %{description: "some description", creation_date: ~U[2024-10-25 19:46:00Z]}
+    test "create_painpoint/1 with valid data creates a painpoint", %{painsnake: painsnake} do
+      valid_attrs = %{
+        description: "some description",
+        creation_date: ~U[2024-10-25 19:46:00Z],
+        painsnake_id: painsnake.id
+      }
 
       assert {:ok, %Painpoint{} = painpoint} = Painpoints.create_painpoint(valid_attrs)
       assert painpoint.description == "some description"

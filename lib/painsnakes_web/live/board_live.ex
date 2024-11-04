@@ -2,17 +2,26 @@
 defmodule PainsnakesWeb.BoardLive do
   use PainsnakesWeb, :live_view
 
-  # Initial state setup
+  alias Painsnakes
+
   def mount(_params, _session, socket) do
-    # Assuming you have context functions
-    # painsnakes = Board.list_painsnakes()
+    if team = socket.assigns[:current_team] do
+      painsnakes = Painsnakes.list_painsnakes_for_team(team.id)
 
-    # socket = socket
-    #   |> assign(:painsnakes, painsnakes)
-    #   |> assign(:painpoints, [])
-    #   |> assign(:active_painsnake, nil)
+      painpoints =
+        Enum.flat_map(painsnakes, fn painsnake ->
+          Painsnakes.list_painpoints_for_painsnake(painsnake.id)
+        end)
 
-    {:ok, socket}
+      socket =
+        socket
+        |> assign(:painsnakes, painsnakes)
+        |> assign(:painpoints, painpoints)
+
+      {:ok, socket}
+    else
+      {:ok, socket}
+    end
   end
 
   # Handle adding new painsnake

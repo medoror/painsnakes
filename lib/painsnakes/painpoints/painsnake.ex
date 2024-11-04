@@ -12,7 +12,7 @@ defmodule Painsnakes.Painpoints.Painsnake do
   @doc false
   def changeset(painsnake, attrs) do
     painsnake
-    |> cast(attrs, [:category_name])
-    |> validate_required([:category_name])
+    |> cast(attrs, [:team_id, :category_name])
+    |> validate_required([:team_id, :category_name])
   end
 end

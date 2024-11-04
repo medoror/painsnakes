@@ -8,8 +8,11 @@ defmodule Painsnakes.PainpointsFixtures do
   Generate a painsnake.
   """
   def painsnake_fixture(attrs \\ %{}) do
+    team = Map.get(attrs, :team) || Painsnakes.AccountsFixtures.team_fixture()
+
     {:ok, painsnake} =
       attrs
+      |> Map.put(:team_id, team.id)
       |> Enum.into(%{
         category_name: "some category_name"
       })
@@ -22,11 +25,14 @@ defmodule Painsnakes.PainpointsFixtures do
   Generate a painpoint.
   """
   def painpoint_fixture(attrs \\ %{}) do
+    painsnake = Map.get(attrs, :painsnake) || Painsnakes.PainpointsFixtures.painsnake_fixture()
+
     {:ok, painpoint} =
       attrs
+      |> Map.put(:painsnake_id, painsnake.id)
       |> Enum.into(%{
-        creation_date: ~U[2024-10-25 19:46:00Z],
-        description: "some description"
+        description: "some description",
+        creation_date: ~U[2024-10-25 19:46:00Z]
       })
       |> Painsnakes.Painpoints.create_painpoint()
 
