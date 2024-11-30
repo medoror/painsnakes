@@ -3,3 +3,64 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+.board-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.painsnake {
+  background-color: #d3d3d3; /* Light gray */
+  color: #000; /* Black text */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.painpoints-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.painpoints-list li {
+  background-color: #fff; /* White background for painpoints */
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.add-painpoint,
+.create-painsnake {
+  background-color: #d3d3d3; /* Light gray */
+  color: #000; /* Black text */
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+}
+
+.add-painpoint:hover,
+.create-painsnake:hover {
+  background-color: #bbb; /* Slightly darker gray on hover */
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-title img {
+  height: 50px;
+}
+
+.logo-title h1 {
+  color: #000;
+  text-decoration: underline;
+}
