@@ -9,6 +9,9 @@
     - mix phx.gen.context Painpoints Painpoint painpoints description:text creation_date:utc_datetime painsnake_id:references:painsnakes
     - mix ecto.migrate
   * Implement UI
+    * need to redo home page
+  * Add crud to painsnakes and painpoints
+    *look at pairs
 
 
 # Random Thoughts
