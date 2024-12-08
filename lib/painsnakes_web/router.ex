@@ -64,10 +64,14 @@ defmodule PainsnakesWeb.Router do
     pipe_through [:browser, :require_authenticated_team]
 
     live_session :require_authenticated_team,
-      on_mount: [{PainsnakesWeb.TeamAuth, :ensure_authenticated}] do
+      on_mount: [
+        {PainsnakesWeb.TeamAuth, :ensure_authenticated},
+        {PainsnakesWeb.CurrentPath, :get_current_path}
+      ] do
       live "/", BoardLive, :index
       live "/teams/settings", TeamSettingsLive, :edit
       live "/teams/settings/confirm_email/:token", TeamSettingsLive, :confirm_email
+      live "/teams/add_painsnake", BoardLive, :add_painsnake
     end
   end
 
@@ -77,7 +81,10 @@ defmodule PainsnakesWeb.Router do
     delete "/teams/log_out", TeamSessionController, :delete
 
     live_session :current_team,
-      on_mount: [{PainsnakesWeb.TeamAuth, :mount_current_team}] do
+      on_mount: [
+        {PainsnakesWeb.TeamAuth, :mount_current_team},
+        {PainsnakesWeb.CurrentPath, :get_current_path}
+      ] do
       live "/teams/confirm/:token", TeamConfirmationLive, :edit
       live "/teams/confirm", TeamConfirmationInstructionsLive, :new
     end

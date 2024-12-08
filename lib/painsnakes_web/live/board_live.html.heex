@@ -1,3 +1,11 @@
+<.modal show={@current_path == ~p"/teams/add_painsnake"} id="add_painsnake_modal">
+  <.live_component
+    module={PainsnakesWeb.AddPainsnakeForm}
+    id="add_painsnake_form"
+    team={@current_team}
+  />
+</.modal>
+
 <div class="board-container">
   <div class="painsnakes-section" style="display: block ruby;">
     <%= for painsnake <- @painsnakes do %>
@@ -11,6 +19,8 @@
         <button class="add-painpoint">+ Add painpoint</button>
       </div>
     <% end %>
-    <button class="create-painsnake">+ Create painsnake</button>
+    <.link navigate={~p"/teams/add_painsnake"}>
+      <button class="create-painsnake">+ Create painsnake</button>
+    </.link>
   </div>
 </div>
