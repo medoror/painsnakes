@@ -28,7 +28,7 @@
       <div class="painsnake">
         <h3><%= painsnake.category_name %></h3>
         <button class="delete-painsnake" phx-click="delete_painsnake" phx-value-id={painsnake.id}>
-          x
+          <.icon name="hero-x-mark-solid" class="h-5 w-5" />
         </button>
         <ul class="painpoints-list">
           <%= for painpoint <- Enum.filter(@painpoints, fn pp -> pp.painsnake_id == painsnake.id end) do %>
@@ -36,12 +36,16 @@
           <% end %>
         </ul>
         <.link navigate={~p"/teams/add_painpoint?painsnake_id=#{painsnake.id}"}>
-          <button class="add-painpoint">+ Add painpoint</button>
+          <button class="add-painpoint">
+            <.icon name="hero-plus-mini" class="h-4 w-4" /> Add painpoint
+          </button>
         </.link>
       </div>
     <% end %>
     <.link navigate={~p"/teams/add_painsnake"}>
-      <button class="create-painsnake">+ Create painsnake</button>
+      <button class="create-painsnake">
+        <.icon name="hero-plus-mini" class="h-5 w-5" /> Create painsnake
+      </button>
     </.link>
   </div>
 </div>
