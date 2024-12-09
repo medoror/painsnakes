@@ -52,6 +52,10 @@ defmodule PainsnakesWeb.BoardLive do
     end
   end
 
+  def handle_event("reset_path", _params, socket) do
+    {:noreply, push_navigate(socket, to: ~p"/")}
+  end
+
   # Handle adding new painsnake
   # def handle_event("create_painsnake", %{"name" => name}, socket) do
   #   case Board.create_painsnake(%{name: name}) do

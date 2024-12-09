@@ -1,4 +1,8 @@
-<.modal show={@current_path == ~p"/teams/add_painsnake"} id="add_painsnake_modal">
+<.modal
+  show={@current_path == ~p"/teams/add_painsnake"}
+  id="add_painsnake_modal"
+  on_cancel={JS.push("reset_path")}
+>
   <.live_component
     module={PainsnakesWeb.AddPainsnakeForm}
     id="add_painsnake_form"
@@ -6,7 +10,11 @@
   />
 </.modal>
 
-<.modal show={@current_path == ~p"/teams/add_painpoint"} id="add_painpoint_modal">
+<.modal
+  show={@current_path == ~p"/teams/add_painpoint"}
+  id="add_painpoint_modal"
+  on_cancel={JS.push("reset_path")}
+>
   <.live_component
     module={PainsnakesWeb.AddPainpointForm}
     id="add_painpoint_form"
