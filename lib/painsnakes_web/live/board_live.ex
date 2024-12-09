@@ -40,6 +40,18 @@ defmodule PainsnakesWeb.BoardLive do
     Painpoints.get_painsnake!(painsnake_id)
   end
 
+  def handle_event("delete_painsnake", %{"id" => id}, socket) do
+    painsnake = get_painsnake_by_id(id)
+
+    case Painsnakes.Painpoints.delete_painsnake(painsnake) do
+      {:ok, _painsnake} ->
+        {:noreply, assign(socket, :painsnakes, Painsnakes.Painpoints.list_painsnakes())}
+
+      {:error, _reason} ->
+        {:noreply, socket}
+    end
+  end
+
   # Handle adding new painsnake
   # def handle_event("create_painsnake", %{"name" => name}, socket) do
   #   case Board.create_painsnake(%{name: name}) do
