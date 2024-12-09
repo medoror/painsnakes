@@ -12,6 +12,7 @@
 }
 
 .painsnake {
+  position: relative; /* Add this line */
   background-color: #d3d3d3; /* Light gray */
   color: #000; /* Black text */
   padding: 1rem;
@@ -20,6 +21,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.delete-painsnake {
+  position: absolute; /* Add this line */
+  top: 0.5rem; /* Adjust as needed */
+  right: 0.5rem; /* Adjust as needed */
+  background: none; /* Optional: remove default button styling */
+  border: none; /* Optional: remove default button styling */
+  cursor: pointer;
+  font-size: 1rem; /* Adjust size as needed */
+  color: #000; /* Ensure the color is visible */
 }
 
 .painpoints-list {
