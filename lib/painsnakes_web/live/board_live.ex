@@ -35,6 +35,15 @@ defmodule PainsnakesWeb.BoardLive do
     end
   end
 
+  def handle_event("update_painsnake", %{"id" => id, "category_name" => category_name}, socket) do
+    case Painpoints.update_painsnake(id, %{category_name: category_name}) do
+      {:ok, _painsnake} ->
+        {:noreply, socket}
+
+      {:error, _reason} ->
+        {:noreply, put_flash(socket, :error, "Failed to update painsnake")}
+    end
+
   defp get_painsnake_by_id(painsnake_id) do
     # Implement your logic to fetch the painsnake by ID
     Painpoints.get_painsnake!(painsnake_id)
