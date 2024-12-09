@@ -2,7 +2,15 @@
   <.live_component
     module={PainsnakesWeb.AddPainsnakeForm}
     id="add_painsnake_form"
-    team={@current_team}
+    selected_painsnake={%{category_name: ""} |> Map.merge(@selected_painsnake || %{})}
+  />
+</.modal>
+
+<.modal show={@current_path == ~p"/teams/add_painpoint"} id="add_painpoint_modal">
+  <.live_component
+    module={PainsnakesWeb.AddPainpointForm}
+    id="add_painpoint_form"
+    selected_painsnake={@selected_painsnake}
   />
 </.modal>
 
@@ -16,7 +24,9 @@
             <li><%= painpoint.description %></li>
           <% end %>
         </ul>
-        <button class="add-painpoint">+ Add painpoint</button>
+        <.link navigate={~p"/teams/add_painpoint?painsnake_id=#{painsnake.id}"}>
+          <button class="add-painpoint">+ Add painpoint</button>
+        </.link>
       </div>
     <% end %>
     <.link navigate={~p"/teams/add_painsnake"}>

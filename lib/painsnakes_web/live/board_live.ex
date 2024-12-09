@@ -3,8 +3,18 @@ defmodule PainsnakesWeb.BoardLive do
   use PainsnakesWeb, :live_view
 
   alias Painsnakes
+  alias Painsnakes.Painpoints
 
-  def mount(_params, _session, socket) do
+  def mount(params, _session, socket) do
+    painsnake_id = params["painsnake_id"]
+
+    selected_painsnake =
+      if painsnake_id do
+        get_painsnake_by_id(painsnake_id)
+      else
+        nil
+      end
+
     if team = socket.assigns[:current_team] do
       painsnakes = Painsnakes.list_painsnakes_for_team(team.id)
 
@@ -17,11 +27,17 @@ defmodule PainsnakesWeb.BoardLive do
         socket
         |> assign(:painsnakes, painsnakes)
         |> assign(:painpoints, painpoints)
+        |> assign(:selected_painsnake, selected_painsnake)
 
       {:ok, socket}
     else
-      {:ok, socket}
+      {:ok, assign(socket, :selected_painsnake, selected_painsnake)}
     end
+  end
+
+  defp get_painsnake_by_id(painsnake_id) do
+    # Implement your logic to fetch the painsnake by ID
+    Painpoints.get_painsnake!(painsnake_id)
   end
 
   # Handle adding new painsnake
