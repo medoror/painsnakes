@@ -1,58 +1,50 @@
-// If you want to use Phoenix channels, run `mix help phx.gen.channel`
-// to get started and then uncomment the line below.
-// import "./user_socket.js"
+ // TODO: liniting for the javascript files
+ import "phoenix_html"
+ import {Socket} from "phoenix"
+ import {LiveSocket} from "phoenix_live_view"
+ import topbar from "../vendor/topbar"
+ let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+ let Hooks = {}
+ Hooks.UpdatePainsnake = {
+   mounted() {
+     window.addEventListener("phx:update_painsnake", (event) => {
+      this.pushEvent("update_painsnake", event.detail)
+     })
+   }
+ }
 
-// You can include dependencies in two ways.
-//
-// The simplest option is to put them in assets/vendor and
-// import them using relative paths:
-//
-//     import "../vendor/some-package.js"
-//
-// Alternatively, you can `npm install some-package --prefix assets` and import
-// them using a path starting with the package name:
-//
-//     import "some-package"
-//
+ let liveSocket = new LiveSocket("/live", Socket, {
+   hooks: Hooks,
+   params: {_csrf_token: csrfToken}
+ })
 
-// Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
-import "phoenix_html"
-// Establish Phoenix Socket and LiveView configuration.
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
-import topbar from "../vendor/topbar"
+ // Show progress bar on live navigation and form submits
+ topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
+ window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
+ window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
+//   function debounce(func, wait) {
+//    let timeout;
+//    return function(...args) {
+//      const context = this;
+//      clearTimeout(timeout);
+//      timeout = setTimeout(() => func.apply(context, args), wait);
+//    };
+//  }
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {
-  longPollFallbackMs: 2500,
-  params: {_csrf_token: csrfToken}
-})
+ document.addEventListener("DOMContentLoaded", () => {
+   document.querySelectorAll("[contenteditable=true]").forEach(element => {
+     element.addEventListener("blur", event => {
+       const id = event.target.getAttribute("phx-value-id");
+       const newName = event.target.innerText.trim();
 
-// Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
-window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
-window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[contenteditable=true]").forEach(element => {
-    element.addEventListener("blur", event => {
-      const id = event.target.getAttribute("phx-value-id");
-      const newName = event.target.innerText.trim();
-
-      if (id && newName) {
-        // Send the update to the server
-        const payload = { id: id, category_name: newName };
-        const event = new CustomEvent("phx:update-painsnake", { detail: payload });
-        window.dispatchEvent(event);
-      }
-    });
-  });
-});
-liveSocket.connect()
-
-// expose liveSocket on window for web console debug logs and latency simulation:
-// >> liveSocket.enableDebug()
-// >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
-// >> liveSocket.disableLatencySim()
-window.liveSocket = liveSocket
-
+       if (id && newName) {
+         const payload = { id: id, category_name: newName };
+         const event = new CustomEvent("phx:update_painsnake", { detail: payload });
+         console.log("dispatching phx:update_painsnake", payload);
+         window.dispatchEvent(event);
+       }
+     });
+   });
+ });
+ liveSocket.connect()
+ window.liveSocket = liveSocket

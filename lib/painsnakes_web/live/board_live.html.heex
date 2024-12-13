@@ -22,32 +22,39 @@
   />
 </.modal>
 
-<div class="board-container">
-  <div class="painsnakes-section" style="display: block ruby;">
-    <%= for painsnake <- @painsnakes do %>
-      <div class="painsnake">
-        <h3 contenteditable="true" phx-blur="update_painsnake" phx-value-id={painsnake.id}>
-          <%= painsnake.category_name %>
-        </h3>
-        <button class="delete-painsnake" phx-click="delete_painsnake" phx-value-id={painsnake.id}>
-          <.icon name="hero-x-mark-solid" class="h-5 w-5" />
-        </button>
-        <ul class="painpoints-list">
-          <%= for painpoint <- Enum.filter(@painpoints, fn pp -> pp.painsnake_id == painsnake.id end) do %>
-            <li><%= painpoint.description %></li>
-          <% end %>
-        </ul>
-        <.link navigate={~p"/teams/add_painpoint?painsnake_id=#{painsnake.id}"}>
-          <button class="add-painpoint">
-            <.icon name="hero-plus-mini" class="h-4 w-4" /> Add painpoint
+<div id="painsnake-container" phx-hook="UpdatePainsnake">
+  <div class="board-container">
+    <div class="painsnakes-section" style="display: block ruby;">
+      <%= for painsnake <- @painsnakes do %>
+        <div class="painsnake">
+          <h3 contenteditable="true">
+             <%= painsnake.category_name %>
+           </h3>
+          <button
+            class="delete-painsnake"
+            phx-click="delete_painsnake"
+            phx-value-id={painsnake.id}
+          >
+            <.icon name="hero-x-mark-solid" class="h-5 w-5" />
           </button>
-        </.link>
-      </div>
-    <% end %>
-    <.link navigate={~p"/teams/add_painsnake"}>
-      <button class="create-painsnake">
-        <.icon name="hero-plus-mini" class="h-5 w-5" /> Create painsnake
-      </button>
-    </.link>
+          <ul class="painpoints-list">
+            <%= for painpoint <- Enum.filter(@painpoints, fn pp -> pp.painsnake_id == painsnake.id
+ end) do %>
+              <li><%= painpoint.description %></li>
+            <% end %>
+          </ul>
+          <.link navigate={~p"/teams/add_painpoint?painsnake_id=#{painsnake.id}"}>
+            <button class="add-painpoint">
+              <.icon name="hero-plus-mini" class="h-4 w-4" /> Add painpoint
+            </button>
+          </.link>
+        </div>
+      <% end %>
+      <.link navigate={~p"/teams/add_painsnake"}>
+        <button class="create-painsnake">
+          <.icon name="hero-plus-mini" class="h-5 w-5" /> Create painsnake
+        </button>
+      </.link>
+    </div>
   </div>
 </div>

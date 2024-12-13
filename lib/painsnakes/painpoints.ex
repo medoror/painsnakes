@@ -21,13 +21,6 @@ defmodule Painsnakes.Painpoints do
     Repo.all(Painsnake)
   end
 
-  def update_painsnake(id, attrs) do
-    Painsnake
-    |> Repo.get!(id)
-    |> Painsnake.changeset(attrs)
-    |> Repo.update()
-  end
-
   @doc """
   Gets a single painsnake.
 

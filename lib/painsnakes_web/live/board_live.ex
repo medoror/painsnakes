@@ -43,10 +43,6 @@ defmodule PainsnakesWeb.BoardLive do
       {:error, _reason} ->
         {:noreply, put_flash(socket, :error, "Failed to update painsnake")}
     end
-
-  defp get_painsnake_by_id(painsnake_id) do
-    # Implement your logic to fetch the painsnake by ID
-    Painpoints.get_painsnake!(painsnake_id)
   end
 
   def handle_event("delete_painsnake", %{"id" => id}, socket) do
@@ -65,21 +61,8 @@ defmodule PainsnakesWeb.BoardLive do
     {:noreply, push_navigate(socket, to: ~p"/")}
   end
 
-  # Handle adding new painsnake
-  # def handle_event("create_painsnake", %{"name" => name}, socket) do
-  #   case Board.create_painsnake(%{name: name}) do
-  #     {:ok, painsnake} ->
-  #       socket = update(socket, :painsnakes, &[painsnake | &1])
-  #       {:noreply, socket}
-
-  #     {:error, _changeset} ->
-  #       {:noreply, put_flash(socket, :error, "Failed to create painsnake")}
-  #   end
-  # end
-
-  # # Handle adding painpoint to a painsnake
-  # def handle_event("add_painpoint", %{"painsnake_id" => id, "content" => content}, socket) do
-  #   # Your painpoint creation logic
-  #   {:noreply, socket}
-  # end
+  defp get_painsnake_by_id(painsnake_id) do
+    # Implement your logic to fetch the painsnake by ID
+    Painpoints.get_painsnake!(painsnake_id)
+  end
 end
