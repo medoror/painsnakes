@@ -73,6 +73,7 @@ defmodule PainsnakesWeb.Router do
       live "/teams/settings/confirm_email/:token", TeamSettingsLive, :confirm_email
       live "/teams/add_painsnake", BoardLive, :add_painsnake
       live "/teams/add_painpoint", BoardLive, :add_painpoint
+      live "/teams/edit_painpoint", BoardLive, :edit_painpoint
     end
   end
 
