@@ -4,7 +4,6 @@ defmodule PainsnakesWeb.EditPainpointForm do
 
   @impl true
   def mount(socket) do
-    IO.inspect(socket, label: "Socket State in mount")
     selected_painpoint = socket.assigns[:selected_painpoint] || %{}
     description = Map.get(selected_painpoint, :description, "")
     selected_painpoint = Map.put(selected_painpoint, :description, description)
