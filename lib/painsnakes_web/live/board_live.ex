@@ -7,10 +7,18 @@ defmodule PainsnakesWeb.BoardLive do
 
   def mount(params, _session, socket) do
     painsnake_id = params["painsnake_id"]
+    painpoint_id = params["painpoint_id"]
 
     selected_painsnake =
       if painsnake_id do
         get_painsnake_by_id(painsnake_id)
+      else
+        nil
+      end
+
+    selected_painpoint =
+      if painpoint_id do
+        get_painpoint_by_id(painpoint_id)
       else
         nil
       end
@@ -28,10 +36,15 @@ defmodule PainsnakesWeb.BoardLive do
         |> assign(:painsnakes, painsnakes)
         |> assign(:painpoints, painpoints)
         |> assign(:selected_painsnake, selected_painsnake)
+        |> assign(:selected_painpoint, selected_painpoint)
 
       {:ok, socket}
     else
-      {:ok, assign(socket, :selected_painsnake, selected_painsnake)}
+      {:ok,
+       assign(socket,
+         selected_painsnake: selected_painsnake,
+         selected_painpoint: selected_painpoint
+       )}
     end
   end
 
@@ -64,5 +77,10 @@ defmodule PainsnakesWeb.BoardLive do
   defp get_painsnake_by_id(painsnake_id) do
     # Implement your logic to fetch the painsnake by ID
     Painpoints.get_painsnake!(painsnake_id)
+  end
+
+  defp get_painpoint_by_id(painpoint_id) do
+    # Implement your logic to fetch the painpoint by ID
+    Painpoints.get_painpoint!(painpoint_id)
   end
 end

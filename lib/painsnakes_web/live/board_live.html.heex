@@ -30,7 +30,7 @@
   <.live_component
     module={PainsnakesWeb.EditPainpointForm}
     id="edit_painpoint_form"
-    selected_painsnake={@selected_painsnake}
+    selected_painpoint={%{description: ""} |> Map.merge(@selected_painpoint || %{})}
   />
 </.modal>
 

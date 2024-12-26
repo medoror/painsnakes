@@ -32,8 +32,6 @@ defmodule PainsnakesWeb.AddPainpointForm do
       creation_date: creation_date
     }
 
-    dbg(valid_attrs)
-
     case Painpoints.create_painpoint(valid_attrs) do
       {:ok, _} ->
         {:noreply, push_navigate(socket, to: ~p"/")}
