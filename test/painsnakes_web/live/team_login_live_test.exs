@@ -75,7 +75,7 @@ defmodule PainsnakesWeb.TeamLoginLiveTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element(~s|main a:fl-contains("Sign up")|)
+        |> element(~s|main a:fl-contains("Create your Team")|)
         |> render_click()
         |> follow_redirect(conn, ~p"/teams/register")
 
