@@ -76,3 +76,7 @@
   color: #000;
   text-decoration: underline;
 }
+
+[contenteditable="true"] {
+  max-width: 200px;
+}

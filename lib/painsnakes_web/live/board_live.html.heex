@@ -40,7 +40,7 @@
     <div class="painsnakes-section" style="display: block ruby;">
       <%= for painsnake <- @painsnakes do %>
         <div class="painsnake">
-          <h3 contenteditable="true">
+          <h3 contenteditable="true" class="cursor-pointer">
              <%= painsnake.category_name %>
            </h3>
           <button
@@ -54,12 +54,14 @@
             <%= for painpoint <- Enum.filter(@painpoints, fn pp -> pp.painsnake_id == painsnake.id
  end) do %>
               <.link navigate={~p"/teams/edit_painpoint?painpoint_id=#{painpoint.id}"}>
-                <li><%= painpoint.description %></li>
+                <li class="hover:rounded-lg hover:border hover:border-gray-300">
+                  <%= painpoint.description %>
+                </li>
               </.link>
             <% end %>
           </ul>
           <.link navigate={~p"/teams/add_painpoint?painsnake_id=#{painsnake.id}"}>
-            <button class="add-painpoint">
+            <button class="add-painpoint w-full">
               <.icon name="hero-plus-mini" class="h-4 w-4" /> Add painpoint
             </button>
           </.link>
