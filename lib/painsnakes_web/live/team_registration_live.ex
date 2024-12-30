@@ -19,8 +19,8 @@ defmodule PainsnakesWeb.TeamRegistrationLive do
               aria-label="User menu"
               aria-haspopup="true"
             >
-              <span class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-green-500">
-                <span class="text-lg font-medium leading-none text-white">🍐</span>
+              <span class="inline-flex h-12 w-12 rounded-full bg-white-500">
+                <img src="/images/logo.png" alt="Logo" />
               </span>
             </div>
             <h2 class="mt-6 text-3xl leading-9 font-extrabold text-gray-900 xl:w-64">
