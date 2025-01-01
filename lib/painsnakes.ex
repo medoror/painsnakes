@@ -15,7 +15,14 @@ defmodule Painsnakes do
   Lists all painsnakes for a given team.
   """
   def list_painsnakes_for_team(team_id) do
-    from(p in Painsnake, where: p.team_id == ^team_id)
+    from(p in Painsnake,
+      where: p.team_id == ^team_id,
+      left_join: pp in Painpoint,
+      on: pp.painsnake_id == p.id,
+      group_by: p.id,
+      order_by: [desc: count(pp.id)],
+      select: p
+    )
     |> Repo.all()
   end
 

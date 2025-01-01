@@ -9,13 +9,12 @@ defmodule Painsnakes.PainpointsFixtures do
   """
   def painsnake_fixture(attrs \\ %{}) do
     team = Map.get(attrs, :team) || Painsnakes.AccountsFixtures.team_fixture()
+    category_name = Map.get(attrs, :category_name, "some category_name")
 
     {:ok, painsnake} =
       attrs
       |> Map.put(:team_id, team.id)
-      |> Enum.into(%{
-        category_name: "some category_name"
-      })
+      |> Map.put(:category_name, category_name)
       |> Painsnakes.Painpoints.create_painsnake()
 
     painsnake
