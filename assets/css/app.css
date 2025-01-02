@@ -46,8 +46,7 @@
   border-radius: 0.25rem;
 }
 
-.add-painpoint,
-.create-painsnake {
+.add-painpoint {
   background-color: #d3d3d3; /* Light gray */
   color: #000; /* Black text */
   padding: 0.5rem;
@@ -55,6 +54,17 @@
   cursor: pointer;
   margin-top: 0.5rem;
   text-decoration: underline;
+  color: #047857;
+}
+.create-painsnake {
+  background-color: #d3d3d3; /* Light gray */
+  color: #000; /* Black text */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+  color: #047857; /* Tailwind's text-green-700 */
 }
 
 .add-painpoint:hover,
@@ -79,4 +89,8 @@
 
 [contenteditable="true"] {
   max-width: 200px;
+}
+
+.painpoints-list .longer-list-item {
+  padding-bottom: 4rem;
 }

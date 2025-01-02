@@ -34,13 +34,13 @@ defmodule PainsnakesWeb.EditPainpointForm do
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-          <button
+          <.button
             type="submit"
             phx-disable-with="Saving..."
             class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
           >
             Save Changes
-          </button>
+          </.button>
         </span>
       </div>
     </form>
