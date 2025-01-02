@@ -50,7 +50,10 @@ defmodule PainsnakesWeb.Router do
     pipe_through [:browser, :redirect_if_team_is_authenticated]
 
     live_session :redirect_if_team_is_authenticated,
-      on_mount: [{PainsnakesWeb.TeamAuth, :redirect_if_team_is_authenticated}] do
+      on_mount: [
+        {PainsnakesWeb.TeamAuth, :redirect_if_team_is_authenticated},
+        {PainsnakesWeb.CurrentPath, :get_current_path}
+      ] do
       live "/teams/register", TeamRegistrationLive, :new
       live "/teams/log_in", TeamLoginLive, :new
       live "/teams/reset_password", TeamForgotPasswordLive, :new

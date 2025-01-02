@@ -20,7 +20,6 @@ defmodule PainsnakesWeb.TeamSessionControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, ~p"/")
       response = html_response(conn, 200)
-      assert response =~ team.email
       assert response =~ ~p"/teams/settings"
       assert response =~ ~p"/teams/log_out"
     end

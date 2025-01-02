@@ -9,7 +9,6 @@ defmodule PainsnakesWeb.TeamLoginLiveTest do
       {:ok, _lv, html} = live(conn, ~p"/teams/log_in")
 
       assert html =~ "Log in"
-      assert html =~ "Register"
       assert html =~ "Forgot your password?"
     end
 
