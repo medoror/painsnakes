@@ -18,3 +18,8 @@
     * Look into generating category names using llms and instructor
     *  Open source vs OpenAI
 
+  Vision
+  * Insights over painsnakes
+  * Reminders about pains
+  
+
