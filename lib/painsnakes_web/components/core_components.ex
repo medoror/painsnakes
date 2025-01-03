@@ -353,7 +353,6 @@ defmodule PainsnakesWeb.CoreComponents do
   def input(%{type: "textarea"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name} class="pb-5">
-      <.label for={@id}><%= @label %></.label>
       <textarea
         id={@id}
         name={@name}
@@ -363,6 +362,7 @@ defmodule PainsnakesWeb.CoreComponents do
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
+        style="resize: none;"
         {@rest}
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
       <.input_error :for={msg <- @errors}><%= msg %></.input_error>

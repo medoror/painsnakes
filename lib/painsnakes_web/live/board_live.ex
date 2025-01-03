@@ -1,4 +1,3 @@
-# lib/your_app_web/live/board_live.ex
 defmodule PainsnakesWeb.BoardLive do
   use PainsnakesWeb, :live_view
 

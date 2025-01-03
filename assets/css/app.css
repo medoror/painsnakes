@@ -54,7 +54,8 @@
   cursor: pointer;
   margin-top: 0.5rem;
   text-decoration: underline;
-  color: #047857;
+  color: #16a34a;
+
 }
 .create-painsnake {
   background-color: #d3d3d3; /* Light gray */
@@ -64,7 +65,7 @@
   cursor: pointer;
   margin-top: 0.5rem;
   text-decoration: underline;
-  color: #047857; /* Tailwind's text-green-700 */
+  color: #16a34a;
 }
 
 .add-painpoint:hover,
@@ -89,8 +90,4 @@
 
 [contenteditable="true"] {
   max-width: 200px;
-}
-
-.painpoints-list .longer-list-item {
-  padding-bottom: 4rem;
 }
