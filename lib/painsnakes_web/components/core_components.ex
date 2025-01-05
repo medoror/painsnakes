@@ -352,7 +352,7 @@ defmodule PainsnakesWeb.CoreComponents do
 
   def input(%{type: "textarea"} = assigns) do
     ~H"""
-    <div phx-feedback-for={@name} class="pb-5">
+    <div phx-feedback-for={@name}>
       <textarea
         id={@id}
         name={@name}
