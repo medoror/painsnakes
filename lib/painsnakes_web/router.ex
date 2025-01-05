@@ -84,13 +84,13 @@ defmodule PainsnakesWeb.Router do
     pipe_through [:browser]
 
     delete "/teams/log_out", TeamSessionController, :delete
-    get "/about", PageController, :about
 
     live_session :current_team,
       on_mount: [
         {PainsnakesWeb.TeamAuth, :mount_current_team},
         {PainsnakesWeb.CurrentPath, :get_current_path}
       ] do
+      live "/about", AboutLive, :show
       live "/teams/confirm/:token", TeamConfirmationLive, :edit
       live "/teams/confirm", TeamConfirmationInstructionsLive, :new
     end
