@@ -16,11 +16,5 @@ config :swoosh, local: false
 
 # Do not print debug messages in production
 config :logger, level: :info
-
-config :painsnakes, Painsnakes.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: System.get_env("SENDGRID_API_KEY"),
-  compress: true
-
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
