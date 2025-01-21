@@ -8,7 +8,7 @@ defmodule Painsnakes.Accounts.TeamNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Painsnakes", "contact@example.com"})
+      |> from({"Painsnakes", "ceo@softwaresansfrontiers.com"})
       |> subject(subject)
       |> text_body(body)
 
